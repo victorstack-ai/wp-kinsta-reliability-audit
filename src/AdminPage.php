@@ -40,7 +40,11 @@ final class AdminPage
             $statuses = [];
         }
 
-        $report = (new ReportBuilder())->build($this->siteInfo(), $this->sanitizeStatuses($statuses), new DateTimeImmutable('now'));
+        $report = (new ReportBuilder())->build(
+            $this->siteInfo(),
+            $this->sanitizeStatuses($statuses),
+            new DateTimeImmutable('now')
+        );
         $reportJson = wp_json_encode($report, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
 
         echo '<div class="wrap">';
@@ -61,7 +65,9 @@ final class AdminPage
         foreach ($items as $item) {
             $current = $statuses[$item['id']] ?? 'unknown';
             echo '<tr>';
-            echo '<td><strong>' . esc_html($item['title']) . '</strong><br /><span style="color:#646970;">' . esc_html($item['description']) . '</span></td>';
+            echo '<td><strong>' . esc_html($item['title']) . '</strong><br /><span style="color:#646970;">'
+                . esc_html($item['description'])
+                . '</span></td>';
             echo '<td>' . $this->statusSelect($item['id'], $current) . '</td>';
             echo '<td>' . esc_html($item['evidence_hint']) . '</td>';
             echo '</tr>';
@@ -73,7 +79,10 @@ final class AdminPage
         echo '</form>';
 
         echo '<h2>JSON Report</h2>';
-        echo '<textarea readonly rows="16" style="width:100%; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, \"Liberation Mono\", \"Courier New\", monospace;">' . esc_textarea($reportJson ?: '') . '</textarea>';
+        echo '<textarea readonly rows="16" style="width:100%; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, '
+            . 'Consolas, \"Liberation Mono\", \"Courier New\", monospace;">'
+            . esc_textarea($reportJson ?: '')
+            . '</textarea>';
         echo '</div>';
     }
 
