@@ -39,7 +39,11 @@ final class ReportBuilderTest extends TestCase
     public function testBuildNormalizesInvalidStatus(): void
     {
         $builder = new ReportBuilder();
-        $report = $builder->build(['name' => 'X'], ['slo' => 'maybe'], new DateTimeImmutable('2026-02-06T00:00:00+00:00'));
+        $report = $builder->build(
+            ['name' => 'X'],
+            ['slo' => 'maybe'],
+            new DateTimeImmutable('2026-02-06T00:00:00+00:00')
+        );
 
         $statuses = array_column($report['items'], 'status', 'id');
         $this->assertSame('unknown', $statuses['slo']);

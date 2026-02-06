@@ -60,7 +60,8 @@ final class AdminPage
         wp_nonce_field('kinsta_reliability_audit_save');
         echo '<input type="hidden" name="action" value="kinsta_reliability_audit_save" />';
         echo '<table class="widefat striped">';
-        echo '<thead><tr><th>Checklist Item</th><th>Status</th><th>Evidence Hint</th></tr></thead>';
+        echo '<thead><tr><th>Checklist Item</th><th>Status</th>'
+            . '<th>Evidence Hint</th></tr></thead>';
         echo '<tbody>';
 
         foreach ($items as $item) {
@@ -80,8 +81,9 @@ final class AdminPage
         echo '</form>';
 
         echo '<h2>JSON Report</h2>';
-        echo '<textarea readonly rows="16" style="width:100%; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, '
-            . 'Consolas, \"Liberation Mono\", \"Courier New\", monospace;">'
+        $textareaStyle = 'width:100%; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, '
+            . '"Liberation Mono", "Courier New", monospace;';
+        echo '<textarea readonly rows="16" style="' . esc_attr($textareaStyle) . '">'
             . esc_textarea($reportJson ?: '')
             . '</textarea>';
         echo '</div>';
