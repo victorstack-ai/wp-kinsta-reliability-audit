@@ -49,7 +49,8 @@ final class AdminPage
 
         echo '<div class="wrap">';
         echo '<h1>Reliability Audit</h1>';
-        echo '<p>Track readiness signals for mission-critical WordPress delivery and export a JSON report for runbooks.</p>';
+        echo '<p>Track readiness signals for mission-critical WordPress delivery and export a JSON report for runbooks.'
+            . '</p>';
 
         if (!empty($_GET['updated'])) {
             echo '<div class="notice notice-success is-dismissible"><p>Checklist updated.</p></div>';
