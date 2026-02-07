@@ -82,6 +82,27 @@ final class Checklist
                 'description' => 'Slow queries are tracked and cleanup is scheduled.',
                 'evidence_hint' => 'Query log or optimization notes.',
             ],
+            [
+                'id' => 'statelessness',
+                'title' => 'Stateless application design',
+                'category' => 'Scalability',
+                'description' => 'No session affinity or local storage dependencies that prevent scaling.',
+                'evidence_hint' => 'External media storage or S3-compatible offload.',
+            ],
+            [
+                'id' => 'load_testing',
+                'title' => 'Peak traffic load testing',
+                'category' => 'Scalability',
+                'description' => 'Site has been tested against expected peak concurrency.',
+                'evidence_hint' => 'Last load test results and bottlenecks identified.',
+            ],
+            [
+                'id' => 'logs_aggregation',
+                'title' => 'Centralized logging',
+                'category' => 'Observability',
+                'description' => 'Errors and access logs are aggregated for cross-instance debugging.',
+                'evidence_hint' => 'Log management platform (ELK, Datadog, etc.).',
+            ],
         ];
     }
 }

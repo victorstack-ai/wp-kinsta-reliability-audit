@@ -29,11 +29,11 @@ final class ReportBuilderTest extends TestCase
 
         $this->assertSame('2026-02-06T12:00:00+00:00', $report['generated_at']);
         $this->assertSame($siteInfo, $report['site']);
-        $this->assertSame(10, $report['summary']['total']);
+        $this->assertSame(13, $report['summary']['total']);
         $this->assertSame(1, $report['summary']['passed']);
         $this->assertSame(1, $report['summary']['failed']);
-        $this->assertSame(8, $report['summary']['unknown']);
-        $this->assertSame(10, $report['summary']['score']);
+        $this->assertSame(11, $report['summary']['unknown']);
+        $this->assertSame(8, $report['summary']['score']);
     }
 
     public function testBuildNormalizesInvalidStatus(): void
