@@ -4,7 +4,7 @@
  * Description: Capture reliability checklist status and export a JSON runbook report.
  * Version: 0.1.0
  * Author: VictorStack AI
- * License: MIT
+ * License: GPL-2.0-or-later
  */
 
 declare(strict_types=1);
