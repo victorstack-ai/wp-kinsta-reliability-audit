@@ -4,6 +4,10 @@ declare(strict_types=1);
 
 namespace KinstaReliabilityAudit;
 
+if (!defined('ABSPATH')) {
+    exit;
+}
+
 use DateTimeImmutable;
 
 final class AdminPage
@@ -20,8 +24,8 @@ final class AdminPage
     {
         add_submenu_page(
             'tools.php',
-            'Reliability Audit',
-            'Reliability Audit',
+            __('Reliability Audit', 'kinsta-reliability-audit'),
+            __('Reliability Audit', 'kinsta-reliability-audit'),
             'manage_options',
             'kinsta-reliability-audit',
             [$this, 'render']
@@ -48,20 +52,20 @@ final class AdminPage
         $reportJson = wp_json_encode($report, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
 
         echo '<div class="wrap">';
-        echo '<h1>Reliability Audit</h1>';
-        echo '<p>Track readiness signals for mission-critical WordPress delivery and export a JSON report for runbooks.'
+        echo '<h1>' . esc_html__('Reliability Audit', 'kinsta-reliability-audit') . '</h1>';
+        echo '<p>' . esc_html__('Track readiness signals for mission-critical WordPress delivery and export a JSON report for runbooks.', 'kinsta-reliability-audit')
             . '</p>';
 
         if (!empty($_GET['updated'])) {
-            echo '<div class="notice notice-success is-dismissible"><p>Checklist updated.</p></div>';
+            echo '<div class="notice notice-success is-dismissible"><p>' . esc_html__('Checklist updated.', 'kinsta-reliability-audit') . '</p></div>';
         }
 
         echo '<form method="post" action="' . esc_url(admin_url('admin-post.php')) . '">';
         wp_nonce_field('kinsta_reliability_audit_save');
         echo '<input type="hidden" name="action" value="kinsta_reliability_audit_save" />';
         echo '<table class="widefat striped">';
-        echo '<thead><tr><th>Checklist Item</th><th>Status</th>'
-            . '<th>Evidence Hint</th></tr></thead>';
+        echo '<thead><tr><th>' . esc_html__('Checklist Item', 'kinsta-reliability-audit') . '</th><th>' . esc_html__('Status', 'kinsta-reliability-audit') . '</th>'
+            . '<th>' . esc_html__('Evidence Hint', 'kinsta-reliability-audit') . '</th></tr></thead>';
         echo '<tbody>';
 
         foreach ($items as $item) {
@@ -77,10 +81,10 @@ final class AdminPage
 
         echo '</tbody>';
         echo '</table>';
-        echo '<p><button class="button button-primary" type="submit">Save Checklist</button></p>';
+        echo '<p><button class="button button-primary" type="submit">' . esc_html__('Save Checklist', 'kinsta-reliability-audit') . '</button></p>';
         echo '</form>';
 
-        echo '<h2>JSON Report</h2>';
+        echo '<h2>' . esc_html__('JSON Report', 'kinsta-reliability-audit') . '</h2>';
         $textareaStyle = 'width:100%; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, '
             . '"Liberation Mono", "Courier New", monospace;';
         echo '<textarea readonly rows="16" style="' . esc_attr($textareaStyle) . '">'
@@ -92,7 +96,7 @@ final class AdminPage
     public function handleSave(): void
     {
         if (!current_user_can('manage_options')) {
-            wp_die('Unauthorized', '', ['response' => 403]);
+            wp_die(esc_html__('Unauthorized', 'kinsta-reliability-audit'), '', ['response' => 403]);
         }
 
         check_admin_referer('kinsta_reliability_audit_save');
@@ -142,9 +146,9 @@ final class AdminPage
     private function statusSelect(string $id, string $current): string
     {
         $options = [
-            'unknown' => 'Unknown',
-            'pass' => 'Pass',
-            'fail' => 'Needs Attention',
+            'unknown' => __('Unknown', 'kinsta-reliability-audit'),
+            'pass' => __('Pass', 'kinsta-reliability-audit'),
+            'fail' => __('Needs Attention', 'kinsta-reliability-audit'),
         ];
 
         $html = '<select name="status[' . esc_attr($id) . ']">';

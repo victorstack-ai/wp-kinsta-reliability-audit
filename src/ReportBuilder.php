@@ -4,6 +4,10 @@ declare(strict_types=1);
 
 namespace KinstaReliabilityAudit;
 
+if (!defined('ABSPATH')) {
+    exit;
+}
+
 use DateTimeImmutable;
 
 final class ReportBuilder

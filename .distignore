@@ -1,6 +1,7 @@
 # Directories
 .git/
 .github/
+.cursor/
 node_modules/
 tests/
 vendor/
@@ -26,9 +27,11 @@ phpunit.xml.dist
 grumphp.yml
 
 # Project files
+README.md
 SECURITY.md
 CHANGELOG.md
 CONTRIBUTING.md
+docker-compose.yml
 
 # OS files
 .DS_Store
